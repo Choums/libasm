@@ -1,0 +1,15 @@
+To compile:
+-> nasm -f elf64 -g -F dwarf -o file.o file.s
+
+-> ld -o program file1.o file2.o ... filen.o
+
+To Debug (gdb):
+-> gdb program
+
+-> (b)reackpoint _start
+
+-> (r)un
+
+-> (s)tep(i)
+
+-> (q)uit
