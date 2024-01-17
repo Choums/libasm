@@ -1,16 +1,20 @@
 BITS 64
 
+extern _ft_write
 extern _ft_strlen
 global _start
 
 section .data
-	s db "salut", 0
+	string		db "salut", 10, 0
+	string_len	equ $-string
 
 section .text
 
 _start:
-	mov rdi, s
-	call _ft_strlen
+	mov rdi, 1
+	mov rsi, string
+	mov rdx, string_len
+	call _ft_write
 	mov rcx, rax
 
 _exit:
