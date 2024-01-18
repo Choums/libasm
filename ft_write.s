@@ -8,7 +8,7 @@ global _ft_write
 ; syscall => rax: 1 | rdi: fd | rsi: buf | rdx: count
 
 _ft_write:
-	mov rax, 1; mov sys_write ID to rax
+	mov rax, 1; sys_write ID
 	syscall; call sys_write
 	jc _error; fail sys_write => CF = 1 
 

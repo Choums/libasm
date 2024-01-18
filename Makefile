@@ -2,7 +2,8 @@ NAME = libasm
 
 LIB = libasm.a
 
-SRCS = 	ft_write.s \
+SRCS = 	ft_read.s \
+		ft_write.s \
 		ft_strlen.s \
 
 CC = gcc
@@ -24,13 +25,14 @@ $(NAME) : $(OBJ)
 	ar rcs $(LIB) $(OBJ)
 
 c :
-	$(CC) $(CFLAGS) main.c $(LIB)
-	
+	$(CC) $(CFLAGS) main.c $(LIB) -o program
+
 clean :
 	rm -f $(OBJ)
 
 fclean : clean
 	rm -f $(LIB)
-	rm -f ./a.out
+	rm -f *.o
+	rm -f program
 
 re : fclean all

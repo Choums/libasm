@@ -1,5 +1,6 @@
 BITS 64
 
+extern _ft_read
 extern _ft_write
 extern _ft_strlen
 global _start
