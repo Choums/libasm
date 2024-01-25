@@ -9,7 +9,7 @@ int main(void)
 {
 	// int fd = open("./file.txt", O_RDWR | O_APPEND);
 	
-	try_strcpy("salut comment ca va ???????");
+	printf("%i\n", strcmp("b", "a"));
 	
 	// close(fd);
 	return (0);

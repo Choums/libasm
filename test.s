@@ -1,4 +1,5 @@
 
+extern ft_strcmp
 extern ft_strcpy
 extern ft_read
 extern ft_write
@@ -6,15 +7,16 @@ extern ft_strlen
 global _start
 
 section .data
-	string		db "salut", 0
-	string_len	equ $-string
+	string		db "b", 0
+	string2		db "a", 0
 
 section .text
 
 _start:
 	mov rax, 0
 	mov rdi, string
-	call ft_strlen
+	mov rsi, string2
+	call ft_strcmp
 
 _exit:
 	mov rax, 60
