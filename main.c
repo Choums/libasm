@@ -9,9 +9,13 @@ int main(void)
 {
 	int fd = open("./file.txt", O_RDWR | O_APPEND);
 	
-	try_read(fd);
+	char buf[1000];
+	char* src = "Salut ca va ?";
 
-	close(fd)
+	strcpy(buf, src);
+	printf("[%s]\n", buf);	
+
+	close(fd);
 	return (0);
 }
 

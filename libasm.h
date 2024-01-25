@@ -9,8 +9,8 @@
 
 
 ssize_t ft_strlen(const char* s);
+char*	ft_strcpy(char* dest, const char* str);
 ssize_t ft_write(int fd, const void* buf, size_t count);
 ssize_t ft_read(int fd, const void* buf, size_t count);
-
 
 #endif

@@ -1,4 +1,5 @@
 
+extern ft_strcpy
 extern ft_read
 extern ft_write
 extern ft_strlen
