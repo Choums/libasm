@@ -12,7 +12,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 NASM = nasm
 
-NASMFLAGS = -f elf64 -g -F dwarf
+NASMFLAGS = -f elf64
 
 OBJ = $(SRCS:.s=.o)
 
@@ -23,9 +23,10 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	ar rcs $(LIB) $(OBJ)
+	ranlib $(LIB)
 
 c :
-	$(CC) $(CFLAGS) main.c $(LIB) -o program
+	$(CC) $(CFLAGS) -o program main.c $(LIB)
 
 clean :
 	rm -f $(OBJ)

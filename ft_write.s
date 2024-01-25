@@ -1,4 +1,4 @@
-global _ft_write
+global ft_write
 
 ; ssize_t write(int fd, const void* buf, size_t count)
 ; write to a file descriptor
@@ -7,7 +7,7 @@ global _ft_write
 ; rdx => count
 ; syscall => rax: 1 | rdi: fd | rsi: buf | rdx: count
 
-_ft_write:
+ft_write:
 	mov rax, 1; sys_write ID
 	syscall; call sys_write
 	jc _error; fail sys_write => CF = 1 
