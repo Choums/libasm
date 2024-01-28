@@ -10,8 +10,8 @@ ft_strcmp:
 	jmp _loop
 
 _loop:
-	mov bl, [rdi + rax]; get s1 last value
-	mov cl, [rsi + rax]; get s2 last value
+	mov bl, BYTE [rdi + rax]; get s1 last value
+	mov cl, BYTE [rsi + rax]; get s2 last value
 
 	cmp bl, 0;
 	je _end
@@ -26,7 +26,7 @@ _loop:
 	jmp _loop
 
 _end:
-	movsx rax, bl; extension de signe obligatoire pour bl
-	movsx r8, cl
-	sub rax, rcx; sub s1[i] - s2[i]
+	movzx rax, bl; extension de signe obligatoire pour bl
+	movzx r8, cl
+	sub rax, r8; sub s1[i] - s2[i]
 	ret

@@ -1,5 +1,6 @@
 #include "./libasm.h"
 
+void try_strcmp(char* s1, char* s2);
 void try_strcpy(char* str);
 void try_strlen(char* str);
 void try_write(int fd, char* str);
@@ -9,24 +10,24 @@ int main(void)
 {
 	// int fd = open("./file.txt", O_RDWR | O_APPEND);
 	
-	printf("%i\n", strcmp("b", "a"));
-	
+	// try_strcmp("Salut", "Salut ");
+	try_strcpy("salut");
 	// close(fd);
 	return (0);
 }
 
 void try_strlen(char* str) {
-	printf("-----\tstrlen\t-----\n");
+	printf("\t------- strlen -------\n");
 	
 	printf("\033[0;31m[OG]\t \'%s\'\033[0m \033[0;33m[%zd]\033[0m\n", str, strlen(str));
 	/*	--------------------------------- */
 	printf("\033[0;34m[ASM]\t \'%s\'\033[0m \033[0;33m[%zd]\033[0m\n", str, ft_strlen(str));
 
-	printf("---------------------\n\n");
+	printf("\t----------------------\n\n");
 }
 
 void try_write(int fd, char* str) {
-	printf("-----\twrite\t-----\n");
+	printf("\t------- write -------\n");
 
 	char* buf1 = "\033[0;31m[OG]\t [";
 	write(fd, buf1, strlen(buf1));
@@ -57,11 +58,11 @@ void try_write(int fd, char* str) {
 	char* buf6 = "]\033[0m\n";
 	write(fd, buf6, strlen(buf6));
 
-	printf("---------------------\n\n");
+	printf("\t----------------------\n\n");
 }
 
 void try_read(int fd) {
-	printf("-----\tread\t-----\n");
+	printf("\t------- read -------\n");
 	// (void)fd;
 	
 	char buf[1000];
@@ -79,11 +80,11 @@ void try_read(int fd) {
 
 	printf("\033[0;34m[ASM]\t\033[0m \033[0;33m[%s] [%lu]\033[0m\n", buf2, bytes2);
 
-	printf("---------------------\n\n");
+	printf("\t----------------------\n\n");
 }
 
 void try_strcpy(char* str) {
-	printf("-----\tstrcpy\t-----\n");
+	printf("\t------- strcpy -------\n");
 	
 	char buf[1000];
 
@@ -91,5 +92,30 @@ void try_strcpy(char* str) {
 	/*	--------------------------------- */
 	printf("\033[0;34m[ASM]\t \'%s\'\033[0m \033[0;33m[%s]\033[0m\n", str, ft_strcpy(buf, str));
 
-	printf("---------------------\n\n");
+	printf("\t----------------------\n\n");
+}
+
+void try_strcmp(char* s1, char* s2) {
+	printf("\t------- strcmp -------\n");
+
+	int ret = strcmp(s1, s2);
+	char buf[50];
+	if (!ret)
+		sprintf(buf, "\033[0;32m[SAME]\033[0m");
+	else
+		sprintf(buf, "\033[0;31m[DIFF]\033[0m");
+
+	printf("\033[0;31m[OG]\t \'%s\' \'%s\'\033[0m %s \033[0;33m[%i]\033[0m\n", s1, s2, buf, ret);
+	/*	--------------------------------- */
+
+	int ret2 = strcmp(s1, s2);
+	char buf2[50];
+	if (!ret2)
+		sprintf(buf2, "\033[0;32m[SAME]\033[0m");
+	else
+		sprintf(buf2, "\033[0;31m[DIFF]\033[0m");
+
+	printf("\033[0;34m[ASM]\t \'%s\' \'%s\'\033[0m %s \033[0;33m[%i]\033[0m\n", s1, s2, buf2, ret2);
+
+	printf("\t-----------------------\n\n");
 }

@@ -8,34 +8,54 @@ SRCS = 	ft_read.s \
 		ft_strcpy.s \
 		ft_strcmp.s \
 
+DEBUG = test.s
+
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 NASM = nasm
 
-NASMFLAGS = -f elf64
+NASMFLAGS = -f elf64 -g -F dwarf
 
 OBJ = $(SRCS:.s=.o)
 
-%.o : %.s
+OBJD = $(DEBUG:.s=.o)
+
+%.o: %.s
 	$(NASM) $(NASMFLAGS) $< -o $@
 
-all : $(NAME)
+all: $(NAME)
 
 $(NAME) : $(OBJ)
-	ar rcs $(LIB) $(OBJ)
+	ar -rcs $(LIB) $(OBJ)
 	ranlib $(LIB)
 
-c :
+c:
 	$(CC) $(CFLAGS) -o program main.c $(LIB)
 
-clean :
+asm: $(OBJ) $(OBJD)
+	ld -o program $(OBJ) $(OBJD) 
+
+MODE = c
+
+debug:
+ifeq ($(MODE), asm)
+	@make asm
+else ifeq ($(MODE), c)
+	@make all c
+else
+	@echo "Only mode [asm] or [c] are accepted !\n"
+	exit 1
+endif
+	gdb program
+
+clean:
 	rm -f $(OBJ)
 
-fclean : clean
+fclean: clean
 	rm -f $(LIB)
 	rm -f *.o
 	rm -f program
 
-re : fclean all
+re: fclean all

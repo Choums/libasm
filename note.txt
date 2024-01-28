@@ -6,10 +6,19 @@ To compile:
 To Debug (gdb):
 -> gdb program
 
--> (b)reackpoint _start
+-> (b)reackpoint _start (or function name)
 
 -> (r)un
 
 -> (s)tep(i)
 
 -> (q)uit
+
+-----------------------------------------
+Make all: Create asm function library
+
+Make c: Compile main C test file with library, create executable [program]
+
+Make asm: Compile asm files with main asm file, create executable [program]
+
+Make debug: Compile asm and main test files, create executable [program] and start gdb
