@@ -7,6 +7,7 @@ SRCS = 	ft_read.s \
 		ft_strlen.s \
 		ft_strcpy.s \
 		ft_strcmp.s \
+		ft_strdup.s
 
 DEBUG = test.s
 
@@ -16,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 NASM = nasm
 
-NASMFLAGS = -f elf64 -g -F dwarf
+NASMFLAGS = -f elf64
 
 OBJ = $(SRCS:.s=.o)
 
@@ -32,7 +33,7 @@ $(NAME) : $(OBJ)
 	ranlib $(LIB)
 
 c:
-	$(CC) $(CFLAGS) -o program main.c $(LIB)
+	$(CC) $(CFLAGS) -o program main.c -L. $(LIB) -lasm -fPIE
 
 asm: $(OBJ) $(OBJD)
 	ld -o program $(OBJ) $(OBJD) 

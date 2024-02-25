@@ -1,6 +1,7 @@
 #include "./libasm.h"
 
 void try_strcmp(char* s1, char* s2);
+void try_strdup(char* str);
 void try_strcpy(char* str);
 void try_strlen(char* str);
 void try_write(int fd, char* str);
@@ -9,9 +10,8 @@ void try_read(int fd);
 int main(void)
 {
 	// int fd = open("./file.txt", O_RDWR | O_APPEND);
-	
-	// try_strcmp("Salut", "Salut ");
-	try_strcpy("salut");
+	try_strdup("salut");
+
 	// close(fd);
 	return (0);
 }
@@ -118,4 +118,18 @@ void try_strcmp(char* s1, char* s2) {
 	printf("\033[0;34m[ASM]\t \'%s\' \'%s\'\033[0m %s \033[0;33m[%i]\033[0m\n", s1, s2, buf2, ret2);
 
 	printf("\t-----------------------\n\n");
+}
+
+void try_strdup(char* str) {
+	printf("\t------- strdup -------\n");
+
+	char* new = strdup(str);
+	printf("\033[0;31m[OG]\t \'%s\'\033[0m \033[0;33m[%s] [%zd]\033[0m\n", str, new, strlen(new));
+	free(new);
+	/*	--------------------------------- */
+	char* new2 = ft_strdup(str);
+	printf("\033[0;34m[ASM]\t \'%s\'\033[0m \033[0;33m[%s] [%zd]\033[0m\n", str, new2, strlen(new2));
+	free(new2);
+
+	printf("\t----------------------\n\n");
 }
