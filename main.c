@@ -10,8 +10,11 @@ void try_read(int fd);
 int main(void)
 {
 	// int fd = open("./file.txt", O_RDWR | O_APPEND);
-	try_strdup("salut");
-
+	// try_write(3, "salut");
+	errno = 0;
+	char buf[100] = "salut";
+	ssize_t ret = ft_write(3, buf, strlen(buf));
+	printf("%zd\n%d\n", ret, errno);
 	// close(fd);
 	return (0);
 }

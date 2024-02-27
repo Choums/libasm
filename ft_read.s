@@ -1,4 +1,5 @@
 global ft_read
+extern __errno_location
 
 ; ssize_t read(int fd, const void* buf, size_t count)
 ; read to a file descriptor
@@ -10,10 +11,15 @@ global ft_read
 ft_read:
 	mov rax, 0; sys_read ID
 	syscall
-	jc _error;
+	cmp rax, 0
+	jl _error;
 
 	ret
 
 _error:
-	mov rax, -1
+	neg rax;
+	mov rdi, rax;
+	call __errno_location WRT ..plt
+	mov [rax], rdi;
+	mov rax, -1;
 	ret

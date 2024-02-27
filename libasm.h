@@ -6,7 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#include <errno.h>
 
 ssize_t ft_strlen(const char* s);
 char*	ft_strdup(const char* s);

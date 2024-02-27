@@ -2,6 +2,8 @@ global ft_strdup
 extern ft_strcpy
 extern ft_strlen
 extern malloc
+extern __errno_location
+
 ; char* strdup(const char* s)
 ; duplicate a string
 
@@ -19,9 +21,20 @@ ft_strdup:
 
 	mov rdi, rax; put len into rdi, malloc take rdi as arg
 	call malloc WRT ..plt
+	cmp rax, 0; fail syscall
+	jz _error
+
 	pop rsi; get the string ptr back from the stack, will be used as strcpy src arg
 
 	mov rdi, rax; use ptr of allocated mem as dest for strcpy
 
 	call ft_strcpy; rdi => dest, rsi => src | ret rax: ptr
+	ret
+
+_error:
+	neg rax;
+	mov rdi, rax;
+	call __errno_location WRT ..plt
+	mov [rax], rdi;
+	mov rax, -1;
 	ret
