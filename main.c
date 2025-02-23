@@ -4,18 +4,38 @@ void try_strcmp(char* s1, char* s2);
 void try_strdup(char* str);
 void try_strcpy(char* str);
 void try_strlen(char* str);
-void try_write(int fd, char* str);
-void try_read(int fd);
+void try_write(char* str);
+void try_read();
 
 int main(void)
-{
-	// int fd = open("./file.txt", O_RDWR | O_APPEND);
-	// try_write(3, "salut");
-	errno = 0;
-	char buf[100] = "salut";
-	ssize_t ret = ft_write(3, buf, strlen(buf));
-	printf("%zd\n%d\n", ret, errno);
-	// close(fd);
+{	
+	try_strlen("Salut");
+	try_strlen("");
+
+	printf("------------------------------------------------------------------\n\n");
+
+	try_strcmp("Salut", "Salut");
+	try_strcmp("Salut", "saluut");
+	try_strcmp("", "");
+
+	printf("------------------------------------------------------------------\n\n");
+
+	try_strcpy("Hellooo");
+	try_strcpy("");
+
+	printf("------------------------------------------------------------------\n\n");
+	
+	try_strdup("Bonjouuuur");
+	try_strdup("");
+
+	printf("------------------------------------------------------------------\n\n");
+
+	try_read();
+
+	printf("------------------------------------------------------------------\n\n");
+
+	try_write("\nca va bien et toi ?");
+
 	return (0);
 }
 
@@ -29,60 +49,53 @@ void try_strlen(char* str) {
 	printf("\t----------------------\n\n");
 }
 
-void try_write(int fd, char* str) {
+void try_write(char* str) {
 	printf("\t------- write -------\n");
+	{
+		int fd = open("./file.txt", O_RDWR | O_APPEND);
 
-	char* buf1 = "\033[0;31m[OG]\t [";
-	write(fd, buf1, strlen(buf1));
-
-	ssize_t ret = write(fd, str, strlen(str));
-	
-	char buf2[1000] = "]\033[0m \033[0;33m[";
-	write(fd, buf2, strlen(buf2));
-	sprintf(buf2, "%zd", ret);
-	write(fd, buf2, strlen(buf2));
-
-	char* buf3 = "]\033[0m\n";
-	write(fd, buf3, strlen(buf3));
-
+		int ret = write(fd, str, strlen(str));
+		printf("\033[0;31m[OG]\t\033[0m \033[0;33m[%d]\033[0m\n",ret);
+		close(fd);
+	}
 	/*	--------------------------------- */
+	{
+		int fd = open("./file.txt", O_RDWR | O_APPEND);
 
-	char* buf4 = "\033[0;34m[ASM]\t [";
-	write(fd, buf4, strlen(buf4));
+		int ret2 = ft_write(fd, str, strlen(str));
+		printf("\033[0;31m[OG]\t\033[0m \033[0;33m[%d]\033[0m\n",ret2);
 
-	ssize_t ret2 = ft_write(fd, str, strlen(str));
-
-	char buf5[1000] = "]\033[0m \033[0;33m[";
-	write(fd, buf5, strlen(buf5));
-	sprintf(buf5, "%zd", ret2);
-	write(fd, buf5, strlen(buf5));
-
-
-	char* buf6 = "]\033[0m\n";
-	write(fd, buf6, strlen(buf6));
+		close(fd);
+	}
 
 	printf("\t----------------------\n\n");
 }
 
-void try_read(int fd) {
+void try_read() {
 	printf("\t------- read -------\n");
-	// (void)fd;
-	
-	char buf[1000];
-	size_t buffer_size = 1000;
-	size_t bytes = read(fd, buf, buffer_size);
+	{
+		int fd = open("./file.txt", O_RDWR | O_APPEND);
+		
+		char buf[1000];
+		size_t buffer_size = 1000;
+		int bytes = read(fd, buf, buffer_size);
 
 
-	printf("\033[0;31m[OG]\t\033[0m \033[0;33m[%s] [%lu]\033[0m\n", buf, bytes);
-	
+		printf("\033[0;31m[OG]\t\033[0m \033[0;33m[%s] [%d]\033[0m\n", buf, bytes);
+		
+		close(fd);
+	}
 	/*	--------------------------------- */
+	{
+		int fd = open("./file.txt", O_RDWR | O_APPEND);
 
-	char buf2[1000];
-	size_t buffer_size2 = 1000;
-	size_t bytes2 = ft_read(fd, buf2, buffer_size2);
+		char buf2[1000];
+		size_t buffer_size2 = 1000;
+		int bytes2 = ft_read(fd, buf2, buffer_size2);
 
-	printf("\033[0;34m[ASM]\t\033[0m \033[0;33m[%s] [%lu]\033[0m\n", buf2, bytes2);
-
+		printf("\033[0;34m[ASM]\t\033[0m \033[0;33m[%s] [%d]\033[0m\n", buf2, bytes2);
+		close(fd);
+	}
 	printf("\t----------------------\n\n");
 }
 

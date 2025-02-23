@@ -6,7 +6,7 @@ extern __errno_location
 ; rdi =>fd
 ; rsi => buf
 ; rdx => count
-; syscall => rax: 1 | rdi: fd | rsi: buf | rdx: count
+; syscall => rax: 0 | rdi: fd | rsi: buf | rdx: count
 
 ft_read:
 	mov rax, 0; sys_read ID

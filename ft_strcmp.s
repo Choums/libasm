@@ -10,8 +10,8 @@ ft_strcmp:
 	jmp _loop
 
 _loop:
-	mov bl, [rdi + rax]; get s1 last value
-	mov cl, [rsi + rax]; get s2 last value
+	mov bl, [rdi + rax]; get s1[rax]
+	mov cl, [rsi + rax]; get s2[rax]
 
 	cmp bl, 0;
 	je _end
